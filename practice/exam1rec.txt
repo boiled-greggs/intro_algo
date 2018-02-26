@@ -1,0 +1,36 @@
+Given sorted array A of distinct integers, give an algorithm to say whether there is an element such that A[i] = i
+Idea:
+  look at middle index. Say we don't have A[i] = i immediately. if A[i] > i, discard right side of array, look at left. If A[i] < i, discard left side and look at right side.
+
+function(A, lo, hi):
+  if lo > hi: return false
+  else
+    mid = (hi - lo)/2
+    if A[mid] = mid: return true
+    if A[mid] > mid: return f(A[lo:mid], lo, mid)
+    if A[mid] < mid: return f(A[mid:hi], mid, hi)
+
+
+======================
+Given poly p(x) = a0 + a1x + ... + anx^n and a point x,
+f(p,x):
+  z = an
+  for i = n-1..0:
+    z = z*x + ai
+  return z
+
+Prove:
+  base case: n = 1, so p = a0 + a1x
+    z = a1 --> a1x + a0
+  suppose this works for n-1
+    q(x) = a1 + a2x + ... + anx^{n-1}
+      --> x(q(x)) + a0
+      --> = a0 + a1x + ... anx^n
+
+Analysis: how many adds/mults
+  n mults, n adds total (1 for every iteration)
+
+  Are there functions for which this is not ideal?
+    you can find x^n with n=2^k by just squaring (if that's the whole polynomial)
+    This is log n multiplications and no adds
+  
